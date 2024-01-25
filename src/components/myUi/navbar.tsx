@@ -1,16 +1,9 @@
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuPortal,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -19,95 +12,194 @@ import {
 
 import { DepartmentsData } from "@/assets/school-depts";
 
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 type DepartmentsData = {
   [key: string]: {
     Departments: string[];
   };
 };
 
-const renderMenuItems = (data: DepartmentsData) => {
-  return Object.entries(data).map(([schoolName, details]) => (
-    <DropdownMenuItem key={schoolName}>
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>{schoolName}</DropdownMenuSubTrigger>
-        <DropdownMenuPortal>
-          <DropdownMenuSubContent className="bg-white">
-            {details.Departments.map((department) => (
-              <DropdownMenuItem key={department}>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>{department}</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent>1st Year</DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuSubContent>
-        </DropdownMenuPortal>
-      </DropdownMenuSub>
-    </DropdownMenuItem>
-  ));
-};
-
 export function Navbar() {
+  const [selectedSchool, setSelectedSchool] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [selectedProgram, setSelectedProgram] = useState("");
+  const [selectedYear, setSelectedYear] = useState(0);
+  const [queryString, setQueryString] = useState("/");
+
+  let hoverTimeout: NodeJS.Timeout;
+
+  const delayedHoverSchool = (schoolName: string) => {
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+      setSelectedSchool(schoolName);
+    }, 40); // Delay in milliseconds
+  };
+
+  const delayedHoverDepartment = (department: string) => {
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+      setSelectedDepartment(department);
+    }, 40); // Delay in milliseconds
+  };
+
+  const delayedHoverProgram = (program: string) => {
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+      console.log(program);
+      setSelectedProgram(program);
+    }, 80); // Delay in milliseconds
+  };
+  const handleMouseLeave = () => {
+    // Clear the timeout if the mouse leaves the element before the delay
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+  };
+  const handleYearClick = (year: number) => {
+    setSelectedYear(year);
+    // Now that we have all selections, navigate to the appropriate page.
+    const queryString = `?school=${encodeURIComponent(
+      selectedSchool
+    )}&department=${encodeURIComponent(
+      selectedDepartment
+    )}&program=${encodeURIComponent(selectedProgram)}&year=${encodeURIComponent(
+      year
+    )}`;
+    setQueryString(queryString);
+    // Navigate to the appropriate page using React Router or window.location
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, []);
+
   return (
     <>
       <div className="flex  h-[8vh] px-10 py-14 justify-between items-center">
-        <img
-          className="w-48"
-          src="/aus-text-logo.png"
-          alt="Assam University's logo with text"
-        />
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-2xl">
-                Home
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="flex w-[7rem] px-5 py-3 bg-white">
-                  <a href="">About Us</a>
-                </div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-2xl">
-                Committee
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="h-[40rem] w-[40rem] bg-white">Sample</div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <NavigationMenuTrigger className="text-2xl">
-                    Alumni Details
-                  </NavigationMenuTrigger>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white">
-                  {renderMenuItems(DepartmentsData)}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-2xl">
-                Alumni Activities
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="h-[40rem] w-[40rem] bg-white">Sample</div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-2xl">
-                Contact Us
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="h-[40rem] w-[40rem] bg-white">Sample</div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+        <Link to="/">
+          <img
+            className="w-48"
+            src="/aus-text-logo.png"
+            alt="Assam University's logo with text"
+          />
+        </Link>
+        <div className="flex gap-5">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Link to="/">Home</Link>
+            </DropdownMenuTrigger>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger>Committee</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger>Alumni Details</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {Object.entries(DepartmentsData).map(
+                ([schoolName, schoolData]) => (
+                  <DropdownMenuSub key={schoolName}>
+                    <DropdownMenuSubTrigger
+                      onMouseEnter={() => delayedHoverSchool(schoolName)}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      {schoolName}
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuSubContent>
+                      {Object.entries(schoolData.Departments).map(
+                        ([deptName, deptData]) => (
+                          <DropdownMenuSub key={deptName}>
+                            <DropdownMenuSubTrigger
+                              onMouseEnter={() =>
+                                delayedHoverDepartment(deptName)
+                              }
+                              onMouseLeave={handleMouseLeave}
+                            >
+                              {deptName}
+                            </DropdownMenuSubTrigger>
+                            <DropdownMenuSubContent>
+                              {Object.entries(deptData.Programs).map(
+                                ([programName, years]) => (
+                                  <DropdownMenuSub key={programName}>
+                                    <DropdownMenuSubTrigger
+                                      onMouseEnter={() =>
+                                        delayedHoverProgram(programName)
+                                      }
+                                      onMouseLeave={handleMouseLeave}
+                                    >
+                                      {programName}
+                                    </DropdownMenuSubTrigger>
+                                    <DropdownMenuSubContent>
+                                      {years.map((year) => (
+                                        <Link
+                                          to={"/alumnidetails" + queryString}
+                                          key={year}
+                                        >
+                                          <DropdownMenuItem
+                                            onMouseEnter={() =>
+                                              handleYearClick(year)
+                                            }
+                                          >
+                                            {year}
+                                          </DropdownMenuItem>
+                                        </Link>
+                                      ))}
+                                    </DropdownMenuSubContent>
+                                  </DropdownMenuSub>
+                                )
+                              )}
+                            </DropdownMenuSubContent>
+                          </DropdownMenuSub>
+                        )
+                      )}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuSub>
+                )
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger>Alumni Activities</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Link to="/aboutus">About Us</Link>
+            </DropdownMenuTrigger>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger>Contact Us</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem>
+              <DropdownMenuItem>Subscription</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
     </>
   );

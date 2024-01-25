@@ -1,91 +1,720 @@
 export const DepartmentsData = {
-  "ABANINDRANATH TAGORE SCHOOL OF CREATIVE ARTS AND COMMUNICATION STUDIES": {
-    Departments: [
-      "Department of Mass Communication",
-      "Department of Visual Arts",
-      "Department of Performing Arts",
-    ],
-  },
-  "ALBERT EINSTEIN SCHOOL OF PHYSICAL SCIENCES": {
-    Departments: [
-      "Department of Physics",
-      "Department of Chemistry",
-      "Department of Mathematics",
-      "Department of Computer Science",
-      "Department of Statistics",
-      "Central Instrumentation Laboratory (CIL)",
-    ],
-  },
-  "ARYABHATTA SCHOOL OF EARTH SCIENCES": {
-    Departments: ["Department of Earth Science"],
-  },
-  "ASHUTOSH MUKHOPADHYAY SCHOOL OF EDUCATION": {
-    Departments: ["Department of Educational Science"],
-  },
-  "DESHABANDHU CHITTARANJAN SCHOOL OF LEGAL STUDIES": {
-    Departments: ["Department of Law"],
-  },
-  "E. P ODUM SCHOOL OF ENVIRONMENTAL SCIENCES": {
-    Departments: ["Department of Ecology Environment Science"],
-  },
-  "HARGOBIND KHURANA SCHOOL OF LIFE SCIENCES": {
-    Departments: [
-      "Department of Life Science and Bio-informatics",
-      "Department of Microbiology",
-      "Department of Biotechnology",
-    ],
-  },
-  "JADUNATH SARKAR SCHOOL OF SOCIAL SCIENCES": {
-    Departments: [
-      "Department of Political Science",
-      "Department of History",
-      "Department of Sociology",
-      "Department of Social Work",
-    ],
-  },
-  "JAWAHARLAL NEHRU SCHOOL OF MANAGEMENT STUDIES": {
-    Departments: [
-      "Department of Business Administration",
-      "Department of Hospitality and Tourism Management",
-    ],
-  },
-  "MAHATMA GANDHI SCHOOL OF ECONOMICS AND COMMERCE": {
-    Departments: ["Department of Economics", "Department of Commerce"],
-  },
-  "RABINDRANATH TAGORE SCHOOL OF LANGUAGES AND CULTURAL STUDIES": {
-    Departments: [
-      "Department of Linguistics",
-      "Department of Bengali",
-      "Department of Hindi",
-      "Department of Manipuri",
-      "Department of Sanskrit",
-      "Department of Indian Comparative Literature",
-      "Department of Urdu",
-    ],
-  },
-  "SARVEPALLI RADHAKRISHNAN SCHOOL OF PHILOSOPHY": {
-    Departments: ["Department of Philosophy"],
-  },
-  "SUNITI KUMAR CHATTOPADHYAY SCHOOL OF ENGLISH AND FOREIGN LANGUAGES STUDIES":
-    {
-      Departments: [
-        "Department of English",
-        "Department of Arabic",
-        "Department of French",
-      ],
+  "Abanindranath Tagore School Of Creative Arts And Communication Studies": {
+    Departments: {
+      "Department of Mass Communication": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [2008, 2009],
+        },
+      },
+      "Department of Visual Arts": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Performing Arts": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
     },
-  "SUSRUTA SCHOOL OF MEDICAL AND PARAMEDICAL SCIENCES": {
-    Departments: ["Department of Pharmaceutical Science"],
   },
-  "SWAMI VIVEKANANDA SCHOOL OF LIBRARY SCIENCES": {
-    Departments: ["Department of Library & Information Science"],
+  "Albert Einstein School Of Physical Sciences": {
+    Departments: {
+      "Department of Physics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Chemistry": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Mathematics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Computer Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Statistics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Central Instrumentation Laboratory (CIL)": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
   },
-  "TRIGUNA SEN SCHOOL OF TECHNOLOGY": {
-    Departments: [
-      "Department of Agricultural Engineering",
-      "Department of Computer Science and Engineering",
-      "Department of Electronics and Communication Engineering",
-      "Department of Applied Science & Humanities",
-    ],
+  "Aryabhatta School Of Earth Sciences": {
+    Departments: {
+      "Department of Earth Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Ashutosh Mukhopadhyay School Of Education": {
+    Departments: {
+      "Department of Educational Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Deshabandhu Chittaranjan School Of Legal Studies": {
+    Departments: {
+      "Department of Law": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "E. P Odum School Of Environmental Sciences": {
+    Departments: {
+      "Department of Ecology Environment Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Hargobind Khurana School Of Life Sciences": {
+    Departments: {
+      "Department of Life Science and Bio-informatics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Microbiology": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Biotechnology": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Jadunath Sarkar School Of Social Sciences": {
+    Departments: {
+      "Department of Political Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of History": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Sociology": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Social Work": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Jawaharlal Nehru School Of Management Studies": {
+    Departments: {
+      "Department of Business Administration": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Hospitality and Tourism Management": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Mahatma Gandhi School Of Economics And Commerce": {
+    Departments: {
+      "Department of Economics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Commerce": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Rabindranath Tagore School Of Languages And Cultural Studies": {
+    Departments: {
+      "Department of Linguistics": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Bengali": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Hindi": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Manipuri": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Sanskrit": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Indian Comparative Literature": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Urdu": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Sarvepalli Radhakrishnan School Of Philosophy": {
+    Departments: {
+      "Department of Philosophy": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Suniti Kumar Chattopadhyay School Of English And Foreign Languages Studies":
+    {
+      Departments: {
+        "Department of English": {
+          Programs: {
+            Bachelor: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            Masters: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            PhD: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+          },
+        },
+        "Department of Arabic": {
+          Programs: {
+            Bachelor: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            Masters: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            PhD: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+          },
+        },
+        "Department of French": {
+          Programs: {
+            Bachelor: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            Masters: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+            PhD: [
+              2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+              2016, 2017, 2018,
+            ],
+          },
+        },
+      },
+    },
+  "Susruta School Of Medical And Paramedical Sciences": {
+    Departments: {
+      "Department of Pharmaceutical Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Swami Vivekananda School Of Library Sciences": {
+    Departments: {
+      "Department of Library & Information Science": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
+  },
+  "Triguna Sen School Of Technology": {
+    Departments: {
+      "Department of Agricultural Engineering": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Computer Science and Engineering": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Electronics and Communication Engineering": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+      "Department of Applied Science & Humanities": {
+        Programs: {
+          Bachelor: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          Masters: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+          PhD: [
+            2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+            2016, 2017, 2018,
+          ],
+        },
+      },
+    },
   },
 };
