@@ -17,7 +17,7 @@ export function AlumniDetails() {
 
   useEffect(() => {
     //api call here
-    const url = "http://localhost:8080/api/v1/students";
+    const url = `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/students`;
     let data = {
       school: school,
       department: department,
