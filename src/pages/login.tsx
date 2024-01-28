@@ -4,15 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { useAuth } from "@/auth/authProvider";
 
 export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-
+  const [errorMessage, setErrorMessage] = useState("");
+  const auth = useAuth();
   const handleLogin = () => {
-    console.log("Logging in with:", username, password);
-
     axios
       .post(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/login`, {
         username: username,
@@ -20,6 +19,10 @@ export function LoginPage() {
       })
       .then((response) => {
         console.log(response.data);
+        if (!response.data.token) {
+          throw new Error("Invalid Username or Password");
+        }
+        auth.login(response.data.token);
         setErrorMessage("");
       })
       .catch((error) => {
