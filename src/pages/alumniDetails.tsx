@@ -1,8 +1,8 @@
 import { Navbar } from "@/components/myUi/navbar";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Student, columns } from "@/components/ui/columns";
-import { DataTable } from "@/components/myUi/data-table";
+import { columns } from "@/components/ui/columns";
+import { DataTable } from "@/components/myUi/dataTable";
 import axios from "axios";
 
 export function AlumniDetails() {

@@ -7,12 +7,9 @@ import {
   useState,
 } from "react";
 import { AuthContext } from "./authContext";
-import { AuthContextType, AuthStateType } from "@/types";
+import { AuthContextType, AuthStateType } from "@/auth/authTypes";
 import { parseJwt } from "@/lib/utils";
-
-type Props = {
-  children: React.ReactNode;
-};
+import { ChildrenProp } from "@/lib/types";
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -25,7 +22,7 @@ type Action = {
   payload: Omit<AuthStateType, "loading">;
 };
 
-const reducer = (state: AuthStateType, action: Action): AuthStateType => {
+const reducer = (_: any, action: Action): AuthStateType => {
   return {
     loading: false,
     token: action.payload.token,
@@ -37,16 +34,23 @@ type Claim = {
   departmentId: number;
 };
 
-export function AuthProvider({ children }: Props) {
+export function AuthProvider({ children }: ChildrenProp) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [claims, setClaims] = useState<Claim | null>(null);
+
+  useEffect(() => {
+    if (!state.token) return;
+    const claims = parseJwt(state.token);
+    setClaims({ isHod: claims.isHod, departmentId: claims.departmentId });
+  }, [state.token]);
+
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     let isHod = null;
     let departmentId = null;
     if (storedToken) {
       const claims = parseJwt(storedToken);
-      console.log(claims);
+      //   console.log(claims);
       isHod = claims.isHod;
       departmentId = claims.departmentId;
     }
@@ -55,7 +59,6 @@ export function AuthProvider({ children }: Props) {
         token: storedToken ? storedToken : null, //store from local storage
       },
     });
-    setClaims({ isHod: isHod, departmentId: departmentId });
   }, []);
 
   const logout = useCallback(() => {
@@ -68,13 +71,12 @@ export function AuthProvider({ children }: Props) {
   }, []);
 
   const login = useCallback((token: string) => {
-    const claims = parseJwt(token);
+    localStorage.setItem("token", token);
     dispatch({
       payload: {
         token: token,
       },
     });
-    setClaims({ isHod: claims.isHod, departmentId: claims.departmentId });
   }, []);
 
   const value: AuthContextType = useMemo(
@@ -86,7 +88,7 @@ export function AuthProvider({ children }: Props) {
       logout,
       login,
     }),
-    [state, logout, login]
+    [state, logout, login, claims]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

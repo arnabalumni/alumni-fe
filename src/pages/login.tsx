@@ -5,17 +5,19 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useAuth } from "@/auth/authProvider";
+import { useNavigate } from "react-router-dom";
 
 export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const {login} = useAuth();
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const handleLogin = () => {
     axios
       .post(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/login`, {
-        username: username,
-        password: password,
+        username,
+        password,
       })
       .then((response) => {
         console.log(response.data);
@@ -24,6 +26,7 @@ export function LoginPage() {
         }
         login(response.data.token);
         setErrorMessage("");
+        navigate("/adminpanel");
       })
       .catch((error) => {
         console.error("There was an error!", error);
@@ -33,7 +36,7 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-20 h-[80vh] justify-center">
+      <div className="flex flex-col items-center gap-20 h-[100vh] justify-center">
         <div className="relative w-full gap-10 flex flex-col items-center">
           <h1 className="text-5xl">Login</h1>
           <div className="flex flex-col items-center absolute bottom-[-13px]">
