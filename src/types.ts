@@ -6,3 +6,8 @@ export type AuthContextType = {
   logout?: () => void;
   login: (token: string) => void;
 };
+
+export type AuthStateType = {
+  token: string | null;
+  loading: boolean;
+};

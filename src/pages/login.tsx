@@ -10,7 +10,7 @@ export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const auth = useAuth();
+  const {login} = useAuth();
   const handleLogin = () => {
     axios
       .post(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/login`, {
@@ -22,7 +22,7 @@ export function LoginPage() {
         if (!response.data.token) {
           throw new Error("Invalid Username or Password");
         }
-        auth.login(response.data.token);
+        login(response.data.token);
         setErrorMessage("");
       })
       .catch((error) => {

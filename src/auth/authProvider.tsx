@@ -7,41 +7,29 @@ import {
   useState,
 } from "react";
 import { AuthContext } from "./authContext";
-import { ActionMapType, AuthContextType, AuthStateType } from "@/types";
+import { AuthContextType, AuthStateType } from "@/types";
 import { parseJwt } from "@/lib/utils";
 
 type Props = {
   children: React.ReactNode;
 };
 
-enum Types {
-  INITIAL = "INITIAL",
-}
-
 export const useAuth = () => useContext(AuthContext);
-
-type Payload = {
-  [Types.INITIAL]: {
-    token: string | null;
-    loading?: boolean;
-  };
-};
-
-type Action = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 const initialState: AuthStateType = {
   token: null,
   loading: true,
 };
 
+type Action = {
+  payload: Omit<AuthStateType, "loading">;
+};
+
 const reducer = (state: AuthStateType, action: Action): AuthStateType => {
-  if (action.type === Types.INITIAL) {
-    return {
-      loading: false,
-      token: action.payload.token,
-    };
-  }
-  return state;
+  return {
+    loading: false,
+    token: action.payload.token,
+  };
 };
 
 type Claim = {
@@ -53,30 +41,26 @@ export function AuthProvider({ children }: Props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [claims, setClaims] = useState<Claim | null>(null);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const storedToken = localStorage.getItem("token");
-      let isHod = null;
-      let departmentId = null;
-      if (storedToken) {
-        const claims = parseJwt(storedToken);
-        isHod = claims.isHod;
-        departmentId = claims.departmentId;
-      }
-      dispatch({
-        type: Types.INITIAL,
-        payload: {
-          token: storedToken ? storedToken : null, //store from local storage
-        },
-      });
-      setClaims({ isHod: isHod, departmentId: departmentId });
-      return () => clearTimeout(timeout);
-    }, 5000);
+    const storedToken = localStorage.getItem("token");
+    let isHod = null;
+    let departmentId = null;
+    if (storedToken) {
+      const claims = parseJwt(storedToken);
+      console.log(claims);
+      isHod = claims.isHod;
+      departmentId = claims.departmentId;
+    }
+    dispatch({
+      payload: {
+        token: storedToken ? storedToken : null, //store from local storage
+      },
+    });
+    setClaims({ isHod: isHod, departmentId: departmentId });
   }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");
     dispatch({
-      type: Types.INITIAL,
       payload: {
         token: null,
       },
@@ -86,7 +70,6 @@ export function AuthProvider({ children }: Props) {
   const login = useCallback((token: string) => {
     const claims = parseJwt(token);
     dispatch({
-      type: Types.INITIAL,
       payload: {
         token: token,
       },
