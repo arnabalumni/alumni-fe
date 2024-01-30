@@ -94,17 +94,13 @@ export function Navbar() {
             <DropdownMenuTrigger>
               <Link to="/">Home</Link>
             </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>About Us</DropdownMenuItem>
+              <DropdownMenuItem>Message from Vice-Chancellor</DropdownMenuItem>
+            </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger>Committee</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
-            </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger>Alumni Details</DropdownMenuTrigger>
@@ -175,29 +171,22 @@ export function Navbar() {
           <DropdownMenu>
             <DropdownMenuTrigger>Alumni Activities</DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
-              <DropdownMenuItem>Subscription</DropdownMenuItem>
+              <DropdownMenuItem>Notable Alumni</DropdownMenuItem>
+              <DropdownMenuItem>Events</DropdownMenuItem>
+              <DropdownMenuItem>Achievements</DropdownMenuItem>
+              <DropdownMenuItem>Reunion</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Link to="/aboutus">About Us</Link>
-            </DropdownMenuTrigger>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger>Contact Us</DropdownMenuTrigger>
-            <DropdownMenuContent>
+            {/* <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem>Subscription</DropdownMenuItem>
-            </DropdownMenuContent>
+            </DropdownMenuContent> */}
           </DropdownMenu>
         </div>
       </div>

@@ -26,3 +26,25 @@ export function parseJwt(token: string) {
     return null;
   }
 }
+
+interface creds {
+  username: string;
+  password: string;
+}
+
+export function setCookieWithExpiry(
+  cookieName: string,
+  cookieValue: creds,
+  expiryMinutes: number
+) {
+  const date = new Date();
+  date.setTime(date.getTime() + expiryMinutes * 60 * 1000);
+  const expires = ";expires=" + date.toUTCString();
+  const cookieValueStr = JSON.stringify(cookieValue);
+  document.cookie =
+    cookieName +
+    "=" +
+    encodeURIComponent(cookieValueStr) +
+    expires +
+    ";path=/;Secure;HttpOnly;SameSite=Strict";
+}

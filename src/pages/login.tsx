@@ -60,7 +60,7 @@ export function LoginPage() {
               </Label>
               <Input
                 type="text"
-                placeholder="User ID"
+                placeholder="Username"
                 id="username"
                 className="rounded-full"
                 value={username}

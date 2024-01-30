@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoutesAuth } from "./ProtectedRoutesUnauthenticated";
 import { Panel } from "@/pages/panel";
 import { ProtectedRoutesNoAuth } from "./ProtectedRoutesAuthenticated";
+import GenerateCredentials from "@/pages/generateCredentials";
 
 export function Routes() {
   const routesForPublic = [
@@ -26,6 +27,10 @@ export function Routes() {
         {
           path: "",
           element: <Panel />,
+        },
+        {
+          path: "generatecredentials",
+          element: <GenerateCredentials />,
         },
       ],
     },
