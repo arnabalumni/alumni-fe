@@ -1,3 +1,4 @@
+import { useAuth } from "@/auth/authProvider";
 import AdminNavbar from "@/components/myUi/adminNavbar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -7,11 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 export function Panel() {
   const navigate = useNavigate();
+  const { isHod } = useAuth();
   const [userType, setUserType] = useState<string>("Admin");
   const [adminOptionsDisplay, setAdminOptionsDisplay] =
     useState<string>("flex");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (isHod) {
+      setUserType("HOD");
+      setAdminOptionsDisplay("hidden");
+    }
+  }, [isHod]);
   return (
     <>
       <AdminNavbar />
@@ -26,7 +33,13 @@ export function Panel() {
               <Pencil size={15} className="mx-2" />
               Update Alumni
             </Button>
-            <Button className="w-[18rem] text-lg py-7 rounded-full" size={"lg"}>
+            <Button
+              className="w-[18rem] text-lg py-7 rounded-full"
+              size={"lg"}
+              onClick={() => {
+                navigate("addalumni");
+              }}
+            >
               <GraduationCap size={17} className="mx-2" />
               Add Alumni
             </Button>

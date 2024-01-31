@@ -6,6 +6,8 @@ import { ProtectedRoutesAuth } from "./ProtectedRoutesUnauthenticated";
 import { Panel } from "@/pages/panel";
 import { ProtectedRoutesNoAuth } from "./ProtectedRoutesAuthenticated";
 import GenerateCredentials from "@/pages/generateCredentials";
+import { ViewCredentials } from "@/pages/viewCredentials";
+import { AddAlumni } from "@/pages/addAlumni";
 
 export function Routes() {
   const routesForPublic = [
@@ -31,6 +33,14 @@ export function Routes() {
         {
           path: "generatecredentials",
           element: <GenerateCredentials />,
+        },
+        {
+          path: "viewcredentials",
+          element: <ViewCredentials />,
+        },
+        {
+          path: "addalumni",
+          element: <AddAlumni />,
         },
       ],
     },

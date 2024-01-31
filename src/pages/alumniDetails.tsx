@@ -22,7 +22,7 @@ export function AlumniDetails() {
       school: school,
       department: department,
       program: program,
-      admission_year: year,
+      admissionYear: year,
     };
     console.log(data);
 
