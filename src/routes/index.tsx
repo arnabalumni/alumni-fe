@@ -42,6 +42,10 @@ export function Routes() {
           path: "addalumni",
           element: <AddAlumni />,
         },
+        {
+          path: "updatealumni",
+          element: <AddAlumni />,
+        },
       ],
     },
   ];

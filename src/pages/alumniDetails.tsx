@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { columns } from "@/components/ui/columns";
 import { DataTable } from "@/components/myUi/dataTable";
 import axios from "axios";
+import { Alumni } from "@/lib/types";
 
 export function AlumniDetails() {
   const location = useLocation();
@@ -13,7 +14,7 @@ export function AlumniDetails() {
   const program = queryParams.get("program");
   const year = queryParams.get("year");
 
-  const [alumni, setAlumni] = useState<any>([]);
+  const [alumni, setAlumni] = useState<Alumni[]>([]);
 
   useEffect(() => {
     //api call here
@@ -24,7 +25,6 @@ export function AlumniDetails() {
       program: program,
       admissionYear: year,
     };
-    console.log(data);
 
     axios({
       method: "post",
