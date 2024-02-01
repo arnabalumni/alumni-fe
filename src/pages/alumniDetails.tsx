@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/myUi/navbar";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { columns } from "@/components/myUi/columns";
+import { columnsViewAlumni } from "@/components/myUi/columns";
 import { DataTable } from "@/components/myUi/dataTable";
 import axios from "axios";
 import { Alumni } from "@/lib/types";
@@ -32,7 +32,7 @@ export function AlumniDetails() {
         </div>
       )}
       <div className="container mx-auto py-10">
-        <DataTable columns={columns} data={alumni} />
+        <DataTable columns={columnsViewAlumni} data={alumni} />
       </div>
     </div>
   );
