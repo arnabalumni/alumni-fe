@@ -13,21 +13,21 @@ export function AlumniDetails() {
   const school = queryParams.get("school");
   const department = queryParams.get("department");
   const program = queryParams.get("program");
-  const addmissionYear = queryParams.get("year");
+  const admissionYear = queryParams.get("year");
   let alumni: Alumni[] = [];
   // const [alumni, setAlumni] = useState<Alumni[]>([]);
-  if (school && department && program && addmissionYear) {
-    alumni = useFetchAlumni(school, department, program, addmissionYear);
+  if (school && department && program && admissionYear) {
+    alumni = useFetchAlumni(school, department, program, admissionYear);
   }
   return (
     <div className="h-[100vh]">
       <Navbar />
-      {school && department && addmissionYear && (
+      {school && department && admissionYear && (
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-4xl">Alumni Details</h1>
           <p className="">for {school}</p>
           <p className="border border-black py-1 px-4 rounded-sm">
-            {program} | {department} | {addmissionYear}
+            {program} | {department} | {admissionYear}
           </p>
         </div>
       )}

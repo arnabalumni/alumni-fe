@@ -48,4 +48,12 @@ export const columnsUpdateAlumni: ColumnDef<Alumni>[] = [
     accessorKey: "linkedin",
     header: "LinkedIn",
   },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      console.log(row.original);
+      return <>hello</>;
+    },
+  },
 ];
