@@ -1,6 +1,6 @@
 import { clearCookie, getCookie } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
-import AdminLayout from "./adminLayout";
+import AdminLayout from "../components/myUi/adminLayout";
 
 export function ViewCredentials() {
   const queryParams = new URLSearchParams(location.search);

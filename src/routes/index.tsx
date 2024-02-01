@@ -8,6 +8,7 @@ import { ProtectedRoutesNoAuth } from "./ProtectedRoutesAuthenticated";
 import GenerateCredentials from "@/pages/generateCredentials";
 import { ViewCredentials } from "@/pages/viewCredentials";
 import { AddAlumni } from "@/pages/addAlumni";
+import { UpdateAlumni } from "@/pages/updateAlumni";
 
 export function Routes() {
   const routesForPublic = [
@@ -44,7 +45,7 @@ export function Routes() {
         },
         {
           path: "updatealumni",
-          element: <AddAlumni />,
+          element: <UpdateAlumni />,
         },
       ],
     },

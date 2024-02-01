@@ -1,5 +1,9 @@
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
-import AdminLayout from "./adminLayout";
+import AdminLayout from "@/components/myUi/adminLayout";
 import {
   Select,
   SelectContent,
@@ -7,12 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useNavigate } from "react-router-dom";
-import { DepartmentsData } from "@/assets/school-depts";
-import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
+
 import { setCookieWithExpiry } from "@/lib/utils";
+
+import { DepartmentsData } from "@/assets/school-depts";
 
 export default function GenerateCredentials() {
   const navigate = useNavigate();

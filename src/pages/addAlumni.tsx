@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import AdminLayout from "./adminLayout";
+import AdminLayout from "../components/myUi/adminLayout";
 
 import { DepartmentsData } from "@/assets/school-depts";
 import axios from "axios";
