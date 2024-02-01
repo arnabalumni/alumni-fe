@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AdminLayout from "@/components/myUi/adminLayout";
 import { Button } from "@/components/ui/button";
@@ -16,10 +16,13 @@ import { Input } from "@/components/ui/input";
 import { DepartmentsData } from "@/assets/school-depts";
 
 export function UpdateAlumni() {
+  // const queryParams = new URLSearchParams(location.search);
+  // const view = queryParams.get("view");
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [programSelected, setProgramSelected] = useState("");
   const [addmissionYear, setAddmissionYear] = useState("");
+
   return (
     <AdminLayout>
       <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
@@ -92,10 +95,21 @@ export function UpdateAlumni() {
           id="admissionYear"
           className="rounded-full"
           value={addmissionYear}
-          onChange={(e) => setAddmissionYear(e.target.value)}
+          onChange={(e) => {
+            setAddmissionYear(e.target.value);
+          }}
         />
       </div>
-      <Button className="rounded-full w-[180px]">Next</Button>
+      <Link
+        to={`/adminpanel/updatealumniview/?school=${schoolSelected}&dept=${departmentSelected}&program=${programSelected}&year=${addmissionYear}`}
+      >
+        <Button
+          disabled={!(programSelected && addmissionYear != "")}
+          className="rounded-full w-[180px]"
+        >
+          Next
+        </Button>
+      </Link>
     </AdminLayout>
   );
 }

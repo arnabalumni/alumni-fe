@@ -95,7 +95,9 @@ export default function GenerateCredentials() {
           id="name"
           className="rounded-full"
           value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          onChange={(e) => {
+            setFullName(e.target.value);
+          }}
         />
       </div>
       <Button className="rounded-full w-[180px]" onClick={handleClick}>

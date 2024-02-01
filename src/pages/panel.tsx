@@ -29,7 +29,13 @@ export function Panel() {
 
         <div className="flex flex-col gap-5">
           <div className="flex gap-10">
-            <Button className="w-[18rem] text-lg py-7 rounded-full" size={"lg"}>
+            <Button
+              className="w-[18rem] text-lg py-7 rounded-full"
+              size={"lg"}
+              onClick={() => {
+                navigate("updatealumni");
+              }}
+            >
               <Pencil size={15} className="mx-2" />
               Update Alumni
             </Button>

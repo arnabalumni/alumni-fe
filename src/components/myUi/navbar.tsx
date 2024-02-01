@@ -25,7 +25,7 @@ export function Navbar() {
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedProgram, setSelectedProgram] = useState("");
-  const [selectedYear, setSelectedYear] = useState(0);
+  const [_, setSelectedYear] = useState(0);
   const [queryString, setQueryString] = useState("/");
 
   let hoverTimeout: NodeJS.Timeout;
@@ -59,7 +59,6 @@ export function Navbar() {
   };
   const handleYearClick = (year: number) => {
     setSelectedYear(year);
-    // Now that we have all selections, navigate to the appropriate page.
     const queryString = `?school=${encodeURIComponent(
       selectedSchool
     )}&department=${encodeURIComponent(
@@ -68,7 +67,6 @@ export function Navbar() {
       year
     )}`;
     setQueryString(queryString);
-    // Navigate to the appropriate page using React Router or window.location
   };
 
   useEffect(() => {
