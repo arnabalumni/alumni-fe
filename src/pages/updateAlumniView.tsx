@@ -1,23 +1,27 @@
 import { DataTable } from "@/components/myUi/dataTable";
-import useFetchAlumni from "@/hooks/useFetchAlumni";
+// import useFetchAlumni from "@/hooks/useFetchAlumni";
 import { Alumni } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
 import { Pencil, Save, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const NameEditComponent = () => {};
+type EditableDataKey = "name" | "occupation" | "address" | "email" | "linkedin";
 
 export function UpdateAlumniView() {
   // Initialize editableData with an object shape that matches your data
-  const [editingRowId, setEditingRowId] = useState("");
-  const [editableData, setEditableData] = useState({
+  const [editingRowId, setEditingRowId] = useState<number | null>(null);
+  const editableDataRef = useRef({
     name: "",
     occupation: "",
     address: "",
     email: "",
     linkedin: "",
   });
+
+  const handleInputChange = (key: EditableDataKey, value: string) => {
+    editableDataRef.current[key] = value;
+  };
 
   const queryParams = new URLSearchParams(location.search);
   const school = queryParams.get("school");
@@ -26,17 +30,6 @@ export function UpdateAlumniView() {
   const admissionYear = queryParams.get("year");
 
   const [alumni, setAlumni] = useState<Alumni[]>([]);
-  //   useEffect(() => {
-  //     setAlumni([
-  //       {
-  //         name: "hello",
-  //         occupation: "world",
-  //         address: "hello",
-  //         email: "world",
-  //         linkedin: "hello",
-  //       },
-  //     ]);
-  //   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,18 +57,13 @@ export function UpdateAlumniView() {
       accessorKey: "name",
       header: "Name",
       cell: (info) => {
-        if (editingRowId === info.row.id) {
+        if (editingRowId === info.row.index) {
           return (
             <input
               className="border border-black rounded-sm"
-              value={alumni[Number(editingRowId)].name}
-              onChange={(e) => {
-                setAlumni((prev) => {
-                  prev[Number(editingRowId)].name = e.target.value;
-                  return prev;
-                });
-              }}
-              autoFocus
+              defaultValue={alumni[info.row.index]?.name}
+              onChange={(e) => handleInputChange("name", e.target.value)}
+              // //onBlur={() => saveChanges(info.row.index)}
             />
           );
         }
@@ -85,41 +73,120 @@ export function UpdateAlumniView() {
     {
       accessorKey: "occupation",
       header: "Occupation",
+      cell: (info) => {
+        if (editingRowId === info.row.index) {
+          return (
+            <input
+              className="border border-black rounded-sm"
+              defaultValue={alumni[info.row.index]?.occupation}
+              onChange={(e) => handleInputChange("occupation", e.target.value)}
+              //onBlur={() => saveChanges(info.row.index)}
+            />
+          );
+        }
+        return info.getValue();
+      },
     },
     {
       accessorKey: "address",
       header: "Address",
+      cell: (info) => {
+        if (editingRowId === info.row.index) {
+          return (
+            <input
+              className="border border-black rounded-sm"
+              defaultValue={alumni[info.row.index]?.address}
+              onChange={(e) => handleInputChange("address", e.target.value)}
+              //onBlur={() => saveChanges(info.row.index)}
+            />
+          );
+        }
+        return info.getValue();
+      },
     },
     {
       accessorKey: "email",
       header: "Email",
+      cell: (info) => {
+        if (editingRowId === info.row.index) {
+          return (
+            <input
+              className="border border-black rounded-sm"
+              defaultValue={alumni[info.row.index]?.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              //onBlur={() => saveChanges(info.row.index)}
+            />
+          );
+        }
+        return info.getValue();
+      },
     },
     {
       accessorKey: "linkedin",
       header: "LinkedIn",
+      cell: (info) => {
+        if (editingRowId === info.row.index) {
+          return (
+            <input
+              className="border border-black rounded-sm"
+              defaultValue={alumni[info.row.index]?.linkedin}
+              onChange={(e) => handleInputChange("linkedin", e.target.value)}
+              //onBlur={() => saveChanges(info.row.index)}
+            />
+          );
+        }
+        return info.getValue();
+      },
     },
     {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const currentlyEditing = editingRowId === row.id;
+        const currentlyEditing = editingRowId === row.index;
+
+        const handleEdit = () => {
+          setEditingRowId(row.index);
+          // Populate the editableDataRef with the row's data
+          editableDataRef.current = {
+            name: alumni[row.index].name,
+            occupation: alumni[row.index].occupation,
+            address: alumni[row.index].address,
+            email: alumni[row.index].email,
+            linkedin: alumni[row.index].linkedin,
+          };
+        };
+
+        const handleSave = async () => {
+          // Assuming you have a function to update the alumni data on the backend
+          // Replace `updateAlumniData` with your actual update function
+          const updatedData = { ...editableDataRef.current };
+          try {
+            // Send the updated data to the backend and await response
+            // await updateAlumniData(row.index, updatedData);
+            console.log("Data to save:", updatedData);
+            // Update the local state to reflect the changes
+            setAlumni((prev) => {
+              const newAlumni = [...prev];
+              newAlumni[row.index] = updatedData;
+              return newAlumni;
+            });
+            setEditingRowId(null); // Exit editing mode
+          } catch (error) {
+            console.error("Failed to save changes:", error);
+          }
+        };
+
         return currentlyEditing ? (
           <div className="flex gap-3 w-[2rem] h-[2rem]">
-            <button onClick={() => setEditingRowId("")}>
+            <button onClick={handleSave}>
               <Save className="w-4" />
             </button>
-            <button>
+            <button onClick={() => setEditingRowId(null)}>
               <X className="w-5" />
             </button>
           </div>
         ) : (
-          <button
-            className="w-[2rem] h-[2rem]"
-            onClick={() => {
-              setEditingRowId(row.id);
-              console.log(row.id);
-            }}
-          >
+          <button className="w-[2rem] h-[2rem]" onClick={handleEdit}>
             <Pencil className="w-4" />
           </button>
         );
