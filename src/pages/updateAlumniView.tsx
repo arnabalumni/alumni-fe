@@ -8,10 +8,13 @@ import { useEffect, useRef, useState } from "react";
 
 type EditableDataKey = "name" | "occupation" | "address" | "email" | "linkedin";
 
+const url = `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/updatealumni`;
+
 export function UpdateAlumniView() {
   // Initialize editableData with an object shape that matches your data
   const [editingRowId, setEditingRowId] = useState<number | null>(null);
-  const editableDataRef = useRef({
+  const editableDataRef = useRef<Alumni>({
+    id: -1,
     name: "",
     occupation: "",
     address: "",
@@ -30,7 +33,6 @@ export function UpdateAlumniView() {
   const admissionYear = queryParams.get("year");
 
   const [alumni, setAlumni] = useState<Alumni[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       const url = `${
@@ -148,6 +150,7 @@ export function UpdateAlumniView() {
           setEditingRowId(row.index);
           // Populate the editableDataRef with the row's data
           editableDataRef.current = {
+            id: alumni[row.index].id,
             name: alumni[row.index].name,
             occupation: alumni[row.index].occupation,
             address: alumni[row.index].address,
@@ -160,15 +163,17 @@ export function UpdateAlumniView() {
           // Assuming you have a function to update the alumni data on the backend
           // Replace `updateAlumniData` with your actual update function
           const updatedData = { ...editableDataRef.current };
+          console.log(updatedData);
           try {
-            // Send the updated data to the backend and await response
-            // await updateAlumniData(row.index, updatedData);
-            console.log("Data to save:", updatedData);
+            const response = await axios.put(url, updatedData, {
+              headers: { "Content-Type": "application/json" },
+            });
+            console.log("Data saved:", response.data);
             // Update the local state to reflect the changes
             setAlumni((prev) => {
-              const newAlumni = [...prev];
-              newAlumni[row.index] = updatedData;
-              return newAlumni;
+              return prev.map((item) =>
+                item.id === updatedData.id ? { ...item, ...updatedData } : item
+              );
             });
             setEditingRowId(null); // Exit editing mode
           } catch (error) {

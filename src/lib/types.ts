@@ -3,6 +3,8 @@ export type ChildrenProp = {
 };
 
 export interface Alumni {
+  [key: string]: any;
+  id: number;
   name: string;
   occupation: string;
   address: string;
