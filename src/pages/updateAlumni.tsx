@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,23 +14,48 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DepartmentsData } from "@/assets/school-depts";
+import { useAuth } from "@/auth/authProvider";
+import { cn } from "@/lib/utils";
 
 export function UpdateAlumni() {
+  const user = useAuth();
+  console.log(user);
   // const queryParams = new URLSearchParams(location.search);
   // const view = queryParams.get("view");
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [programSelected, setProgramSelected] = useState("");
   const [addmissionYear, setAddmissionYear] = useState("");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user.isHod) {
+      (async () => {
+        const response = await axios.post(
+          `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getdepartment`,
+          {
+            id: user.departmentId,
+          }
+        );
+        console.log(response.data);
+        setSchoolSelected(response.data.schoolName);
+        setDepartmentSelected(response.data.departmentName);
+      })();
+    }
+  });
+  // console.log(response.da);
   return (
     <AdminLayout>
       <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
         Update Alumni
       </h1>
       <div className="flex flex-col gap-5">
-        <Select value={schoolSelected} onValueChange={setSchoolSelected}>
-          <SelectTrigger className="w-[280px] rounded-full text-left">
+        <Select
+          disabled={user.isHod}
+          value={schoolSelected}
+          onValueChange={setSchoolSelected}
+        >
+          <SelectTrigger className={cn("w-[280px] rounded-full text-left")}>
             <SelectValue placeholder="School" />
           </SelectTrigger>
           <SelectContent className="rounded-lg">
@@ -42,7 +67,7 @@ export function UpdateAlumni() {
           </SelectContent>
         </Select>
         <Select
-          disabled={!schoolSelected}
+          disabled={!schoolSelected || user.isHod}
           value={departmentSelected}
           onValueChange={setDepartmentSelected}
         >
@@ -100,16 +125,18 @@ export function UpdateAlumni() {
           }}
         />
       </div>
-      <Link
-        to={`/adminpanel/updatealumniview/?school=${schoolSelected}&dept=${departmentSelected}&program=${programSelected}&year=${addmissionYear}`}
+
+      <Button
+        disabled={!(programSelected && addmissionYear)}
+        className="rounded-full w-[180px]"
+        onClick={() => {
+          navigate(
+            `/adminpanel/updatealumniview/?school=${schoolSelected}&dept=${departmentSelected}&program=${programSelected}&year=${addmissionYear}`
+          );
+        }}
       >
-        <Button
-          disabled={!(programSelected && addmissionYear != "")}
-          className="rounded-full w-[180px]"
-        >
-          Next
-        </Button>
-      </Link>
+        Next
+      </Button>
     </AdminLayout>
   );
 }
