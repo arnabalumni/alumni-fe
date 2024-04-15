@@ -37,7 +37,6 @@ export function UpdateAlumni() {
             id: user.departmentId,
           }
         );
-        console.log(response.data);
         setSchoolSelected(response.data.schoolName);
         setDepartmentSelected(response.data.departmentName);
       })();
@@ -45,7 +44,7 @@ export function UpdateAlumni() {
   });
   // console.log(response.da);
   return (
-    <AdminLayout>
+    <AdminLayout className="py-24">
       <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
         Update Alumni
       </h1>

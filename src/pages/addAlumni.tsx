@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -24,6 +24,7 @@ import AdminLayout from "../components/myUi/adminLayout";
 
 import { DepartmentsData } from "@/assets/school-depts";
 import axios from "axios";
+import { useAuth } from "@/auth/authProvider";
 
 const FormSchema = z.object({
   school: z.string().min(1, "School selection is required."),
@@ -41,6 +42,7 @@ export function AddAlumni() {
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
+  const user = useAuth();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -56,6 +58,27 @@ export function AddAlumni() {
     },
   });
 
+  useEffect(() => {
+    if (user.isHod) {
+      (async () => {
+        try {
+          const response = await axios.post(
+            `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getdepartment`,
+            { id: user.departmentId }
+          );
+          const { schoolName, departmentName } = response.data;
+
+          form.setValue("school", schoolName, { shouldValidate: true });
+          form.setValue("department", departmentName, { shouldValidate: true });
+
+          setSchoolSelected(schoolName);
+          setDepartmentSelected(departmentName);
+        } catch (error) {
+          console.error("Error fetching department info:", error);
+        }
+      })();
+    }
+  }, [form, user.isHod, user.departmentId]);
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     axios
       .post(
@@ -96,11 +119,14 @@ export function AddAlumni() {
                       field.onChange(value);
                       setSchoolSelected(value);
                     }}
-                    defaultValue={field.value}
+                    defaultValue={user.isHod ? schoolSelected : field.value}
+                    disabled={user.isHod}
                   >
                     <FormControl>
                       <SelectTrigger className="rounded-full text-left">
-                        <SelectValue placeholder="School" />
+                        <SelectValue
+                          placeholder={user.isHod ? schoolSelected : "School"}
+                        />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -128,11 +154,16 @@ export function AddAlumni() {
                       field.onChange(value);
                       setDepartmentSelected(value);
                     }}
-                    defaultValue={field.value}
+                    defaultValue={user.isHod ? departmentSelected : field.value}
+                    disabled={user.isHod}
                   >
                     <FormControl>
                       <SelectTrigger className="rounded-full text-left">
-                        <SelectValue placeholder="Department" />
+                        <SelectValue
+                          placeholder={
+                            user.isHod ? departmentSelected : "Department"
+                          }
+                        />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>

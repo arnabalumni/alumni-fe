@@ -1,3 +1,5 @@
+import AdminLayout from "@/components/myUi/adminLayout";
+import AdminNavbar from "@/components/myUi/adminNavbar";
 import { DataTable } from "@/components/myUi/dataTable";
 // import useFetchAlumni from "@/hooks/useFetchAlumni";
 import { Alumni } from "@/lib/types";
@@ -65,6 +67,7 @@ export function UpdateAlumniView() {
               className="border border-black rounded-sm"
               defaultValue={alumni[info.row.index]?.name}
               onChange={(e) => handleInputChange("name", e.target.value)}
+              required
               // //onBlur={() => saveChanges(info.row.index)}
             />
           );
@@ -82,6 +85,7 @@ export function UpdateAlumniView() {
               className="border border-black rounded-sm"
               defaultValue={alumni[info.row.index]?.occupation}
               onChange={(e) => handleInputChange("occupation", e.target.value)}
+              required
               //onBlur={() => saveChanges(info.row.index)}
             />
           );
@@ -99,6 +103,7 @@ export function UpdateAlumniView() {
               className="border border-black rounded-sm"
               defaultValue={alumni[info.row.index]?.address}
               onChange={(e) => handleInputChange("address", e.target.value)}
+              required
               //onBlur={() => saveChanges(info.row.index)}
             />
           );
@@ -116,6 +121,7 @@ export function UpdateAlumniView() {
               className="border border-black rounded-sm"
               defaultValue={alumni[info.row.index]?.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
+              required
               //onBlur={() => saveChanges(info.row.index)}
             />
           );
@@ -133,6 +139,7 @@ export function UpdateAlumniView() {
               className="border border-black rounded-sm"
               defaultValue={alumni[info.row.index]?.linkedin}
               onChange={(e) => handleInputChange("linkedin", e.target.value)}
+              required
               //onBlur={() => saveChanges(info.row.index)}
             />
           );
@@ -163,6 +170,10 @@ export function UpdateAlumniView() {
           // Assuming you have a function to update the alumni data on the backend
           // Replace `updateAlumniData` with your actual update function
           const updatedData = { ...editableDataRef.current };
+          if (Object.values(updatedData).some((value) => value === "")) {
+            alert("All fields are required");
+            return;
+          }
           console.log(updatedData);
           try {
             const response = await axios.put(url, updatedData, {
@@ -200,7 +211,8 @@ export function UpdateAlumniView() {
   ];
 
   return (
-    <div className="h-[100vh] pt-10">
+    <AdminLayout className="gap-[5rem] py-0">
+      {/* <AdminNavbar/> */}
       {school && department && admissionYear && (
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-4xl">Update Alumni Details</h1>
@@ -213,6 +225,6 @@ export function UpdateAlumniView() {
       <div className="container mx-auto py-10 w-[90rem]">
         <DataTable columns={columnsUpdateAlumni} data={alumni} />
       </div>
-    </div>
+    </AdminLayout>
   );
 }

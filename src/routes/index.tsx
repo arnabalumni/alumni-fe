@@ -10,6 +10,7 @@ import { ViewCredentials } from "@/pages/viewCredentials";
 import { AddAlumni } from "@/pages/addAlumni";
 import { UpdateAlumni } from "@/pages/updateAlumni";
 import { UpdateAlumniView } from "@/pages/updateAlumniView";
+import { AddAlumniBulk } from "@/pages/addAlumniBulk";
 
 export function Routes() {
   const routesForPublic = [
@@ -43,6 +44,10 @@ export function Routes() {
         {
           path: "addalumni",
           element: <AddAlumni />,
+        },
+        {
+          path: "addalumnibulk",
+          element: <AddAlumniBulk />,
         },
         {
           path: "updatealumni",
