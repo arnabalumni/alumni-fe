@@ -1,11 +1,13 @@
 import { useAuth } from "@/auth/authProvider";
 import AdminLayout from "@/components/myUi/adminLayout";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { useState } from "react";
 
 export function AddAlumniBulk() {
   const auth = useAuth();
+  const { toast } = useToast();
   console.log(auth);
   type AppState = {
     file: File | null; // since initially there might not be a file, null is a valid state
@@ -42,7 +44,11 @@ export function AddAlumniBulk() {
           console.log(response.data);
         })
         .catch((error) => {
-          // It's good practice to handle potential errors
+          toast({
+            variant: "destructive",
+            title: "Error Occurred",
+            description: error.message,
+          }); // It's good practice to handle potential errors
           console.error("Error uploading file:", error);
         });
     }

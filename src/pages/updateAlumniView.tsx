@@ -1,7 +1,6 @@
 import AdminLayout from "@/components/myUi/adminLayout";
-import AdminNavbar from "@/components/myUi/adminNavbar";
 import { DataTable } from "@/components/myUi/dataTable";
-// import useFetchAlumni from "@/hooks/useFetchAlumni";
+import { useToast } from "@/components/ui/use-toast";
 import { Alumni } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
@@ -14,6 +13,7 @@ const url = `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/updatealumni`;
 
 export function UpdateAlumniView() {
   // Initialize editableData with an object shape that matches your data
+  const { toast } = useToast();
   const [editingRowId, setEditingRowId] = useState<number | null>(null);
   const editableDataRef = useRef<Alumni>({
     id: -1,
@@ -47,8 +47,17 @@ export function UpdateAlumniView() {
         const response = await axios.post(url, data, {
           headers: { "Content-Type": "application/json" },
         });
+        toast({
+          title: "Success",
+          description: "Data fetched successfully",
+        });
         setAlumni(response.data);
-      } catch (error) {
+      } catch (error: any) {
+        toast({
+          variant: "destructive",
+          title: "Error Occurred",
+          description: error.response.data,
+        });
         console.error("There was an error!", error);
       }
     };
@@ -187,8 +196,19 @@ export function UpdateAlumniView() {
               );
             });
             setEditingRowId(null); // Exit editing mode
-          } catch (error) {
+
+            toast({
+              title: "Success",
+              description: "Student updated successfully",
+            });
+          } catch (error: any) {
             console.error("Failed to save changes:", error);
+
+            toast({
+              variant: "destructive",
+              title: "Error Occurred",
+              description: error.response.data,
+            });
           }
         };
 

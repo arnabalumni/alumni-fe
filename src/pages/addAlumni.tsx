@@ -25,6 +25,7 @@ import AdminLayout from "../components/myUi/adminLayout";
 import { DepartmentsData } from "@/assets/school-depts";
 import axios from "axios";
 import { useAuth } from "@/auth/authProvider";
+import { useToast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
   school: z.string().min(1, "School selection is required."),
@@ -39,6 +40,7 @@ const FormSchema = z.object({
 });
 
 export function AddAlumni() {
+  const { toast } = useToast();
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
@@ -73,7 +75,17 @@ export function AddAlumni() {
 
           setSchoolSelected(schoolName);
           setDepartmentSelected(departmentName);
-        } catch (error) {
+
+          toast({
+            title: "Success",
+            description: "Department info fetched successfully.",
+          });
+        } catch (error: any) {
+          toast({
+            variant: "destructive",
+            title: "Error Occurred",
+            description: error.response.data,
+          });
           console.error("Error fetching department info:", error);
         }
       })();
@@ -88,8 +100,17 @@ export function AddAlumni() {
       .then((response) => {
         setUploadStatus("Uploaded Successfully");
         console.log(response.data);
+        toast({
+          title: "Success",
+          description: "Upload Successful",
+        });
       })
       .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Error Occurred",
+          description: error.response.data,
+        });
         console.error("There was an error!", error);
       });
     console.log(data);

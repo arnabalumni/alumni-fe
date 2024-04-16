@@ -16,9 +16,11 @@ import { Input } from "@/components/ui/input";
 import { DepartmentsData } from "@/assets/school-depts";
 import { useAuth } from "@/auth/authProvider";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 
 export function UpdateAlumni() {
   const user = useAuth();
+  const { toast } = useToast();
   console.log(user);
   // const queryParams = new URLSearchParams(location.search);
   // const view = queryParams.get("view");
@@ -31,14 +33,22 @@ export function UpdateAlumni() {
   useEffect(() => {
     if (user.isHod) {
       (async () => {
-        const response = await axios.post(
-          `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getdepartment`,
-          {
-            id: user.departmentId,
-          }
-        );
-        setSchoolSelected(response.data.schoolName);
-        setDepartmentSelected(response.data.departmentName);
+        try {
+          const response = await axios.post(
+            `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getdepartment`,
+            {
+              id: user.departmentId,
+            }
+          );
+          setSchoolSelected(response.data.schoolName);
+          setDepartmentSelected(response.data.departmentName);
+        } catch (error: any) {
+          toast({
+            variant: "destructive",
+            title: "Error Occurred",
+            description: error.response.data,
+          });
+        }
       })();
     }
   });
