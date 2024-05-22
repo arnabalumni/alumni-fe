@@ -11,11 +11,11 @@ export const columnsViewAlumni: ColumnDef<Alumni>[] = [
   },
   {
     accessorKey: "occupation",
-    header: "Occupation",
+    header: "Present Occupation",
   },
   {
     accessorKey: "address",
-    header: "Address",
+    header: "Present Address",
   },
   {
     accessorKey: "email",
@@ -23,7 +23,7 @@ export const columnsViewAlumni: ColumnDef<Alumni>[] = [
   },
   {
     accessorKey: "linkedin",
-    header: "LinkedIn",
+    header: "LinkedIn or Personal Webpage",
   },
 ];
 
@@ -38,7 +38,7 @@ export const columnsUpdateAlumni: ColumnDef<Alumni>[] = [
   },
   {
     accessorKey: "address",
-    header: "Address",
+    header: "Present Address",
   },
   {
     accessorKey: "email",
@@ -52,7 +52,6 @@ export const columnsUpdateAlumni: ColumnDef<Alumni>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      console.log(row.original);
       return <>hello</>;
     },
   },

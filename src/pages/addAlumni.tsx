@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -22,25 +22,50 @@ import {
 import { Input } from "@/components/ui/input";
 import AdminLayout from "../components/myUi/adminLayout";
 
-import { DepartmentsData } from "@/assets/school-depts";
+// import { DepartmentsData } from "@/assets/school-depts";
 import axios from "axios";
 import { useAuth } from "@/auth/authProvider";
 import { useToast } from "@/components/ui/use-toast";
+import { DepartmentsData } from "@/lib/types";
+import { SchoolAndDept } from "@/components/myUi/schoolAndDept";
 
 const FormSchema = z.object({
   school: z.string().min(1, "School selection is required."),
-  department: z.string().min(1, "Deparment selection is required."),
+  department: z.string().min(1, "Department selection is required."),
   program: z.string().min(1, "Program selection is required."),
   name: z.string().min(1, "Name is required."),
-  admissionYear: z.string().min(1, "Year of admission is required."),
-  address: z.string().min(1, "Address is required."),
-  occupation: z.string().min(1, "Occupation is required."),
-  email: z.string().min(1, "Email is required."),
+  admissionYear: z
+    .string()
+    .regex(/^\d{4}$/, "Year of admission must be a four-digit number."),
+  address: z.string().optional(), // Now optional
+  occupation: z.string().optional(), // Now optional
+  email: z.string().optional(), // Now optional
   linkedin: z.string().optional(),
+  contact: z.string().optional(), // New field for contact key
 });
+
+function clearForm(form: UseFormReturn<z.infer<typeof FormSchema>>) {
+  // Extract the current values for school, department, and program
+  const { school, department, program } = form.getValues();
+
+  // Reset only the specified fields to empty, and restore the others
+  form.reset({
+    school, // keep the current school
+    department, // keep the current department
+    program, // keep the current program
+    name: "",
+    admissionYear: "",
+    address: "",
+    occupation: "",
+    email: "",
+    contact: "",
+    linkedin: "",
+  });
+}
 
 export function AddAlumni() {
   const { toast } = useToast();
+  const [DepartmentsData, setDepartmentsData] = useState<DepartmentsData>({});
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
@@ -48,18 +73,30 @@ export function AddAlumni() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      school: "",
-      department: "",
-      program: "",
       name: "",
       admissionYear: "",
       address: "",
       occupation: "",
       email: "",
+      contact: "",
       linkedin: "",
     },
   });
-
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(
+          `${
+            import.meta.env.VITE_APP_LOCAL_SERVER_URL
+          }/api/v1/getallinstitution`
+        );
+        const data = await response.json();
+        setDepartmentsData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
   useEffect(() => {
     if (user.isHod) {
       (async () => {
@@ -104,6 +141,7 @@ export function AddAlumni() {
           title: "Success",
           description: "Upload Successful",
         });
+        clearForm(form);
       })
       .catch((error) => {
         toast({
@@ -122,6 +160,7 @@ export function AddAlumni() {
         <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
           Add Alumni
         </h1>
+        <SchoolAndDept />
       </div>
       <Form {...form}>
         <form
@@ -274,10 +313,23 @@ export function AddAlumni() {
           />
           <FormField
             control={form.control}
+            name="occupation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="px-5 text-xs ">
+                  Present Occupation
+                </FormLabel>
+                <Input {...field} type="text" className="rounded-full" />
+                <FormMessage {...field} />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="address"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="px-5 text-xs ">Address</FormLabel>
+                <FormLabel className="px-5 text-xs ">Present Address</FormLabel>
                 <Input {...field} type="text" className="rounded-full" />
                 <FormMessage {...field} />
               </FormItem>
@@ -286,10 +338,10 @@ export function AddAlumni() {
 
           <FormField
             control={form.control}
-            name="occupation"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="px-5 text-xs ">Occupation</FormLabel>
+                <FormLabel className="px-5 text-xs ">Email ID</FormLabel>
                 <Input {...field} type="text" className="rounded-full" />
                 <FormMessage {...field} />
               </FormItem>
@@ -297,10 +349,10 @@ export function AddAlumni() {
           />
           <FormField
             control={form.control}
-            name="email"
+            name="contact"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="px-5 text-xs ">Email</FormLabel>
+                <FormLabel className="px-5 text-xs ">Contact Number</FormLabel>
                 <Input {...field} type="text" className="rounded-full" />
                 <FormMessage {...field} />
               </FormItem>
@@ -312,19 +364,28 @@ export function AddAlumni() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="px-5 text-xs ">
-                  LinkedIn (Optional)
+                  LinkedIn or Personal Webpage
                 </FormLabel>
                 <Input {...field} type="text" className="rounded-full" />
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button
-            className="rounded-full col-span-3 w-[10rem] justify-self-center mt-16"
-            type="submit"
-          >
-            Submit
-          </Button>
+          <div className="flex gap-5 py-10">
+            <Button
+              variant={"outline"}
+              className="rounded-full col-span-3 w-[10rem] justify-self-center mt-16"
+              onClick={() => clearForm(form)}
+            >
+              Clear
+            </Button>
+            <Button
+              className="rounded-full col-span-3 w-[10rem] justify-self-center mt-16"
+              type="submit"
+            >
+              Submit
+            </Button>
+          </div>
         </form>
       </Form>
     </AdminLayout>

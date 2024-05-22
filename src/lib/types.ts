@@ -11,3 +11,9 @@ export interface Alumni {
   email: string;
   linkedin: string;
 }
+
+export type DepartmentsData = {
+  [key: string]: {
+    Departments: string[];
+  };
+};

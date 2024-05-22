@@ -13,10 +13,12 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-import { DepartmentsData } from "@/assets/school-depts";
+// import { DepartmentsData } from "@/assets/school-depts";
 import { useAuth } from "@/auth/authProvider";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
+import { DepartmentsData } from "@/lib/types";
+import { SchoolAndDept } from "@/components/myUi/schoolAndDept";
 
 export function UpdateAlumni() {
   const user = useAuth();
@@ -24,11 +26,28 @@ export function UpdateAlumni() {
   console.log(user);
   // const queryParams = new URLSearchParams(location.search);
   // const view = queryParams.get("view");
+  const [DepartmentsData, setDepartmentsData] = useState<DepartmentsData>({});
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [programSelected, setProgramSelected] = useState("");
   const [addmissionYear, setAddmissionYear] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(
+          `${
+            import.meta.env.VITE_APP_LOCAL_SERVER_URL
+          }/api/v1/getallinstitution`
+        );
+        const data = await response.json();
+        setDepartmentsData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     if (user.isHod) {
@@ -55,12 +74,15 @@ export function UpdateAlumni() {
   // console.log(response.da);
   return (
     <AdminLayout className="py-24">
-      <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
-        Update Alumni
-      </h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
+          Update Alumni
+        </h1>
+        <SchoolAndDept />
+      </div>
       <div className="flex flex-col gap-5">
         <Select
-          disabled={user.isHod}
+          disabled={!!user.isHod}
           value={schoolSelected}
           onValueChange={setSchoolSelected}
         >
@@ -76,7 +98,7 @@ export function UpdateAlumni() {
           </SelectContent>
         </Select>
         <Select
-          disabled={!schoolSelected || user.isHod}
+          disabled={!schoolSelected || !!user.isHod}
           value={departmentSelected}
           onValueChange={setDepartmentSelected}
         >

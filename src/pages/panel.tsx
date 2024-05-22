@@ -1,46 +1,36 @@
 import { useAuth } from "@/auth/authProvider";
-import AdminNavbar from "@/components/myUi/adminNavbar";
+import AdminLayout from "@/components/myUi/adminLayout";
+import { SchoolAndDept } from "@/components/myUi/schoolAndDept";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import axios from "axios";
 import { GraduationCap, KeyRound, Pencil, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function Panel() {
   const navigate = useNavigate();
-  const { isHod, departmentId } = useAuth();
+  const { isHod } = useAuth();
   const [userType, setUserType] = useState<string>("Admin");
-  const [school, setSchool] = useState<string>("Admin");
-  const [department, setDepartment] = useState<string>("Admin");
   const [adminOptionsDisplay, setAdminOptionsDisplay] =
     useState<string>("flex");
 
   useEffect(() => {
     if (isHod) {
-      (async () => {
-        const response = await axios.post(
-          `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getdepartment`,
-          {
-            id: departmentId,
-          }
-        );
-        setSchool(response.data.schoolName);
-        setDepartment(response.data.departmentName);
-      })();
       setUserType("HOD");
       setAdminOptionsDisplay("hidden");
+    } else {
+      setUserType("Admin");
+      setAdminOptionsDisplay("flex");
     }
-  }, [isHod]);
+  }, [isHod, userType]);
   return (
-    <>
-      <AdminNavbar />
-      <div className="flex flex-col items-center gap-[4rem] py-[10rem]">
+    <AdminLayout>
+      <div className="flex flex-col items-center gap-[4rem] -mt-20">
         <div className="flex flex-col gap-5">
           <h1 className="text-3xl decoration-2 underline underline-offset-[12px]">
             {userType} Panel
           </h1>
-          {isHod && <span className="">{`${school}, ${department}`}</span>}
+          <SchoolAndDept />
         </div>
 
         <div className="flex flex-col gap-5">
@@ -102,6 +92,6 @@ export function Panel() {
           </div>
         </div>
       </div>
-    </>
+    </AdminLayout>
   );
 }

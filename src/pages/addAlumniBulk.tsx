@@ -1,14 +1,17 @@
 import { useAuth } from "@/auth/authProvider";
 import AdminLayout from "@/components/myUi/adminLayout";
+import { SchoolAndDept } from "@/components/myUi/schoolAndDept";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import axios from "axios";
+import { Download } from "lucide-react";
 import { useState } from "react";
 
 export function AddAlumniBulk() {
-  const auth = useAuth();
+  const { isHod, token } = useAuth();
   const { toast } = useToast();
-  console.log(auth);
+  console.log(isHod);
   type AppState = {
     file: File | null; // since initially there might not be a file, null is a valid state
   };
@@ -35,7 +38,7 @@ export function AddAlumniBulk() {
       const config = {
         headers: {
           "content-type": "multipart/form-data",
-          Authorization: `Bearer ${auth.token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       axios
@@ -56,13 +59,33 @@ export function AddAlumniBulk() {
 
   return (
     <AdminLayout>
-      <div className="flex flex-col gap-20">
-        <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
-          Add Alumni (XLSX)
-        </h1>
-        <form onSubmit={handleSubmit}>
-          <input type="file" onChange={handleChange} required accept=".xlsx" />
-          <Button type="submit">Upload</Button>
+      <div className="flex flex-col gap-16 -mt-20">
+        <div className="flex flex-col gap-4">
+          <h1 className="decoration-2 text-3xl underline underline-offset-[12px]">
+            Add Alumni (XLSX)
+          </h1>
+          <SchoolAndDept />
+        </div>
+        <a
+          href={
+            isHod
+              ? "/bulkStudentHODFormat.xlsx"
+              : "/bulkStudentAdminFormat.xlsx"
+          }
+          download
+        >
+          <Button className="flex w-full gap-4" variant={"outline"}>
+            <Download size={16} />
+            Download Sample Excel File
+          </Button>
+        </a>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <Input type="file" onChange={handleChange} required accept=".xlsx" />
+          <div className="flex flex-col gap-2">
+            <Button type="submit" className="flex-grow">
+              Upload
+            </Button>
+          </div>
         </form>
       </div>
     </AdminLayout>

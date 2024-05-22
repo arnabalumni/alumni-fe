@@ -9,24 +9,32 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DepartmentsData } from "@/lib/types";
 
-import { DepartmentsData } from "@/assets/school-depts";
+// import { DepartmentsData } from "@/assets/school-depts";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-type DepartmentsData = {
-  [key: string]: {
-    Departments: string[];
-  };
-};
-
 export function Navbar() {
+  const [DepartmentsData, setDepartmentsData] = useState<DepartmentsData>({});
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedProgram, setSelectedProgram] = useState("");
   const [_, setSelectedYear] = useState(0);
   const [queryString, setQueryString] = useState("/");
+
+  useEffect(()=>{
+    (async()=>{
+      try{
+        const response = await fetch(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getallinstitution`);
+        const data = await response.json();
+        setDepartmentsData(data);
+      }catch(error){
+        console.error(error);
+      }
+    })();
+  },[])
 
   let hoverTimeout: NodeJS.Timeout;
 

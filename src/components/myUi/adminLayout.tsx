@@ -11,6 +11,7 @@ import {
   ToastTitle,
   ToastViewport,
 } from "@/components/ui/toast";
+import { Footer } from "./footer";
 interface AdminLayoutProps extends ChildrenProp {
   className?: ClassValue;
 }
@@ -22,7 +23,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
       <AdminNavbar />
       <div
         className={cn(
-          "flex w-full min-h-[70vh] flex-col items-center gap-[7rem] py-[10rem]",
+          "flex w-full min-h-[80vh] flex-col items-center gap-[7rem] justify-center",
           className
         )}
       >
@@ -43,6 +44,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
         );
       })}
       <ToastViewport />
+      <Footer />
     </ToastProvider>
   );
 }

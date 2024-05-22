@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -14,14 +14,28 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { setCookieWithExpiry } from "@/lib/utils";
+import { DepartmentsData } from "@/lib/types";
 
-import { DepartmentsData } from "@/assets/school-depts";
+// import { DepartmentsData } from "@/assets/school-depts";
 
 export default function GenerateCredentials() {
   const navigate = useNavigate();
+  const [DepartmentsData, setDepartmentsData] = useState<DepartmentsData>({});
   const [schoolSelected, setSchoolSelected] = useState("");
   const [departmentSelected, setDepartmentSelected] = useState("");
   const [fullName, setFullName] = useState("");
+
+  useEffect(()=>{
+    (async()=>{
+      try{
+        const response = await fetch(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getallinstitution`);
+        const data = await response.json();
+        setDepartmentsData(data);
+      }catch(error){
+        console.error(error);
+      }
+    })();
+  },[])
 
   function handleClick() {
     axios

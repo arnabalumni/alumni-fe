@@ -4,12 +4,29 @@ import { useToast } from "@/components/ui/use-toast";
 import { Alumni } from "@/lib/types";
 import { ColumnDef } from "@tanstack/react-table";
 import axios from "axios";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Pencil, Save, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 type EditableDataKey = "name" | "occupation" | "address" | "email" | "linkedin";
 
-const url = `${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/updatealumni`;
+const updateAlumniEndpoint = `${
+  import.meta.env.VITE_APP_LOCAL_SERVER_URL
+}/api/v1/updatealumni`;
+
+const deleteAlumniEndpoint = `${
+  import.meta.env.VITE_APP_LOCAL_SERVER_URL
+}/api/v1/delete/`;
 
 export function UpdateAlumniView() {
   // Initialize editableData with an object shape that matches your data
@@ -86,7 +103,7 @@ export function UpdateAlumniView() {
     },
     {
       accessorKey: "occupation",
-      header: "Occupation",
+      header: "Present Occupation",
       cell: (info) => {
         if (editingRowId === info.row.index) {
           return (
@@ -104,7 +121,7 @@ export function UpdateAlumniView() {
     },
     {
       accessorKey: "address",
-      header: "Address",
+      header: "Present Address",
       cell: (info) => {
         if (editingRowId === info.row.index) {
           return (
@@ -140,7 +157,7 @@ export function UpdateAlumniView() {
     },
     {
       accessorKey: "linkedin",
-      header: "LinkedIn",
+      header: "LinkedIn or Personal Webpage",
       cell: (info) => {
         if (editingRowId === info.row.index) {
           return (
@@ -157,6 +174,7 @@ export function UpdateAlumniView() {
       },
     },
     {
+      accessorKey: "Actions",
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
@@ -176,8 +194,6 @@ export function UpdateAlumniView() {
         };
 
         const handleSave = async () => {
-          // Assuming you have a function to update the alumni data on the backend
-          // Replace `updateAlumniData` with your actual update function
           const updatedData = { ...editableDataRef.current };
           if (Object.values(updatedData).some((value) => value === "")) {
             alert("All fields are required");
@@ -185,11 +201,14 @@ export function UpdateAlumniView() {
           }
           console.log(updatedData);
           try {
-            const response = await axios.put(url, updatedData, {
-              headers: { "Content-Type": "application/json" },
-            });
+            const response = await axios.put(
+              updateAlumniEndpoint,
+              updatedData,
+              {
+                headers: { "Content-Type": "application/json" },
+              }
+            );
             console.log("Data saved:", response.data);
-            // Update the local state to reflect the changes
             setAlumni((prev) => {
               return prev.map((item) =>
                 item.id === updatedData.id ? { ...item, ...updatedData } : item
@@ -212,18 +231,82 @@ export function UpdateAlumniView() {
           }
         };
 
+        const handleDelete = async () => {
+          const selectRowData = { ...editableDataRef.current };
+          console.log(selectRowData);
+          try {
+            const response = await axios.delete(
+              deleteAlumniEndpoint + selectRowData.id,
+              {
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+            console.log("Data saved:", response.data);
+            const alumniWithoutCurrent = alumni.filter(
+              (item) => item.id !== selectRowData.id
+            );
+            setAlumni(alumniWithoutCurrent);
+            setEditingRowId(null); // Exit editing mode
+
+            toast({
+              title: "Success",
+              description: "Student deleted successfully",
+            });
+          } catch (error: any) {
+            console.error("Failed to save changes:", error);
+
+            toast({
+              variant: "destructive",
+              title: "Error Occurred",
+              description: error.response.data,
+            });
+          }
+        };
+
         return currentlyEditing ? (
-          <div className="flex gap-3 w-[2rem] h-[2rem]">
+          <div className="flex gap-3">
             <button onClick={handleSave}>
-              <Save className="w-4" />
+              {/* <Save className="w-4" /> */}
+              Save
             </button>
+            <Dialog>
+              <DialogTrigger>Delete</DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>
+                    Are you sure you want to delete this Alumni?
+                  </DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    the student's information.
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="sm:justify-end">
+                  <DialogClose asChild>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={handleDelete}
+                    >
+                      Yes, delete Alumni
+                    </Button>
+                  </DialogClose>
+                  <Button type="button" variant="secondary">
+                    Go back
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+
             <button onClick={() => setEditingRowId(null)}>
-              <X className="w-5" />
+              {/* <X className="w-5" /> */}
+              Cancel
             </button>
           </div>
         ) : (
           <button className="w-[2rem] h-[2rem]" onClick={handleEdit}>
-            <Pencil className="w-4" />
+            {/* <Pencil className="w-4" /> */}
+            Edit
           </button>
         );
       },
@@ -232,7 +315,6 @@ export function UpdateAlumniView() {
 
   return (
     <AdminLayout className="gap-[5rem] py-0">
-      {/* <AdminNavbar/> */}
       {school && department && admissionYear && (
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-4xl">Update Alumni Details</h1>
@@ -242,7 +324,7 @@ export function UpdateAlumniView() {
           </p>
         </div>
       )}
-      <div className="container mx-auto py-10 w-[90rem]">
+      <div className="max-w-screen-2xl py-10 w-full">
         <DataTable columns={columnsUpdateAlumni} data={alumni} />
       </div>
     </AdminLayout>
