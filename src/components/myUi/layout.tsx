@@ -2,6 +2,7 @@ import React from "react";
 import { Navbar } from "./navbar";
 import { cn } from "@/lib/utils";
 import { Footer } from "./footer";
+import { Header } from "./header";
 
 export function Layout({
   children,
@@ -9,9 +10,17 @@ export function Layout({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col justify-between min-h-screen">
+      <Header />
       <Navbar />
-      <div className={cn("flex min-h-[80vh]", className)}>{children}</div>
+      <div
+        className={cn(
+          "flex min-h-[74vh] items-center justify-center",
+          className
+        )}
+      >
+        {children}
+      </div>
       <Footer />
     </div>
   );

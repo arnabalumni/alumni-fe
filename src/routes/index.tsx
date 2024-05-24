@@ -11,12 +11,22 @@ import { AddAlumni } from "@/pages/addAlumni";
 import { UpdateAlumni } from "@/pages/updateAlumni";
 import { UpdateAlumniView } from "@/pages/updateAlumniView";
 import { AddAlumniBulk } from "@/pages/addAlumniBulk";
+import { About } from "@/pages/about";
+import { Contact } from "@/pages/contact";
 
 export function Routes() {
   const routesForPublic = [
     {
       path: "/",
       element: <Home />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
     },
     {
       path: "/alumnidetails",

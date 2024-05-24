@@ -6,6 +6,7 @@ import { DataTable } from "@/components/myUi/dataTable";
 import axios from "axios";
 import { Alumni } from "@/lib/types";
 import useFetchAlumni from "@/hooks/useFetchAlumni";
+import { Layout } from "@/components/myUi/layout";
 
 export function AlumniDetails() {
   const location = useLocation();
@@ -20,8 +21,7 @@ export function AlumniDetails() {
     alumni = useFetchAlumni(school, department, program, admissionYear);
   }
   return (
-    <div className="h-[100vh]">
-      <Navbar />
+    <Layout className="flex-col">
       {school && department && admissionYear && (
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-4xl">Alumni Details</h1>
@@ -34,6 +34,6 @@ export function AlumniDetails() {
       <div className="container mx-auto py-10">
         <DataTable columns={columnsViewAlumni} data={alumni} />
       </div>
-    </div>
+    </Layout>
   );
 }

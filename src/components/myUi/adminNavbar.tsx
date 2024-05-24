@@ -6,7 +6,7 @@ export default function AdminNavbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   return (
-    <div className="flex h-[8vh] px-10 py-14 justify-between items-center">
+    <div className="flex h-[8vh] px-10 py-8 justify-between items-center">
       <Button variant={"outline"} onClick={() => navigate(-1)}>
         Back
       </Button>

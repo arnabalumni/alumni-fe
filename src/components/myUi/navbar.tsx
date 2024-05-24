@@ -24,17 +24,21 @@ export function Navbar() {
   const [_, setSelectedYear] = useState(0);
   const [queryString, setQueryString] = useState("/");
 
-  useEffect(()=>{
-    (async()=>{
-      try{
-        const response = await fetch(`${import.meta.env.VITE_APP_LOCAL_SERVER_URL}/api/v1/getallinstitution`);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(
+          `${
+            import.meta.env.VITE_APP_LOCAL_SERVER_URL
+          }/api/v1/getallinstitution`
+        );
         const data = await response.json();
         setDepartmentsData(data);
-      }catch(error){
+      } catch (error) {
         console.error(error);
       }
     })();
-  },[])
+  }, []);
 
   let hoverTimeout: NodeJS.Timeout;
 
@@ -87,21 +91,23 @@ export function Navbar() {
 
   return (
     <>
-      <div className="flex  h-[8vh] px-10 py-14 justify-between items-center">
-        <Link to="/">
+      <div className="flex h-[6vh] px-10 justify-end items-center bg-primary text-primary-foreground">
+        {/* <Link to="/">
           <img
             className="w-48"
             src="/aus-text-logo.png"
             alt="Assam University's logo with text"
           />
-        </Link>
+        </Link> */}
         <div className="flex gap-5">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Link to="/">Home</Link>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem>About Us</DropdownMenuItem>
+              <Link to="/about">
+                <DropdownMenuItem>About Us</DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>Message from Vice-Chancellor</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -184,7 +190,9 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
-            <DropdownMenuTrigger>Contact Us</DropdownMenuTrigger>
+            <Link to={"/contact"}>
+              <DropdownMenuTrigger>Contact Us</DropdownMenuTrigger>
+            </Link>
             {/* <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />

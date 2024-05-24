@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useAuth } from "@/auth/authProvider";
 import { useNavigate } from "react-router-dom";
+import AdminLayout from "@/components/myUi/adminLayout";
 
 export function LoginPage() {
   const [username, setUsername] = useState("");
@@ -35,8 +36,8 @@ export function LoginPage() {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center gap-20 h-[100vh] justify-center">
+    <AdminLayout>
+      <div className="flex flex-col items-center gap-20 justify-center">
         <div className="relative w-full gap-10 flex flex-col items-center">
           <h1 className="text-5xl">Login</h1>
           <div className="flex flex-col items-center absolute bottom-[-13px]">
@@ -96,6 +97,6 @@ export function LoginPage() {
         </div>
       </div>
       <h1 className="text-red-600">{errorMessage}</h1>
-    </>
+    </AdminLayout>
   );
 }

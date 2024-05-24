@@ -12,6 +12,7 @@ import {
   ToastViewport,
 } from "@/components/ui/toast";
 import { Footer } from "./footer";
+import { Header } from "./header";
 interface AdminLayoutProps extends ChildrenProp {
   className?: ClassValue;
 }
@@ -20,6 +21,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
   const { toasts } = useToast();
   return (
     <ToastProvider>
+      <Header />
       <AdminNavbar />
       <div
         className={cn(
