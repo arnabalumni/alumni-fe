@@ -190,6 +190,11 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
+            <Link to={"/"}>
+              <DropdownMenuTrigger>Gallery</DropdownMenuTrigger>
+            </Link>
+          </DropdownMenu>
+          <DropdownMenu>
             <Link to={"/contact"}>
               <DropdownMenuTrigger>Contact Us</DropdownMenuTrigger>
             </Link>
