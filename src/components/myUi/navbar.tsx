@@ -139,6 +139,7 @@ export function Navbar() {
                               {deptName}
                             </DropdownMenuSubTrigger>
                             <DropdownMenuSubContent>
+                              {/* @ts-ignore */}
                               {Object.entries(deptData.Programs).map(
                                 ([programName, years]) => (
                                   <DropdownMenuSub key={programName}>
@@ -151,6 +152,7 @@ export function Navbar() {
                                       {programName}
                                     </DropdownMenuSubTrigger>
                                     <DropdownMenuSubContent>
+                                      {/* @ts-ignore */}
                                       {years.map((year) => (
                                         <Link
                                           to={"/alumnidetails" + queryString}

@@ -7,7 +7,7 @@ export function Contact() {
     <Layout className="flex-col">
       <div className="flex flex-row items-center gap-20 max-w-7xl">
         <div className="text-left">
-          <h2 className="text-4xl">Phone No</h2>
+          <h2 className="text-4xl">Phone No:</h2>
           <p>+91-03842-270806</p>
         </div>
         <div className="text-left">

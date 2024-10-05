@@ -17,10 +17,10 @@ export const columnsViewAlumni: ColumnDef<Alumni>[] = [
     accessorKey: "address",
     header: "Present Address",
   },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
+  // {
+  //   accessorKey: "email",
+  //   header: "Email",
+  // },
   {
     accessorKey: "linkedin",
     header: "LinkedIn or Personal Webpage",
@@ -40,10 +40,10 @@ export const columnsUpdateAlumni: ColumnDef<Alumni>[] = [
     accessorKey: "address",
     header: "Present Address",
   },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
+  // {
+  //   accessorKey: "email",
+  //   header: "Email",
+  // },
   {
     accessorKey: "linkedin",
     header: "LinkedIn",
